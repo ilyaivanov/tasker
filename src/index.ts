@@ -83,7 +83,7 @@ document.addEventListener("keydown", (e) => {
         }
         if (e.code == "Enter") {
             items.splice(selectedItem + 1, 0, "");
-            insertAfter(selectedItem, items[selectedItem]);
+            insertAfter(selectedItem, items[selectedItem + 1]);
             updateSelected(selectedItem + 1);
             startEdit();
             e.preventDefault();
