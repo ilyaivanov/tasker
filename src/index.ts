@@ -22,7 +22,13 @@ const app = div({
 function insertAfter(index: number, title: string) {
     app.children[index].insertAdjacentElement(
         "afterend",
-        div({ classes: "item", text: title })
+        div({ classes: "item", text: title }),
+    );
+}
+function insertBefore(index: number, title: string) {
+    app.children[index].insertAdjacentElement(
+        "beforebegin",
+        div({ classes: "item", text: title }),
     );
 }
 
@@ -91,10 +97,15 @@ document.addEventListener("keydown", (e) => {
             startEdit();
             e.preventDefault();
         }
-        if (e.code == "Enter") {
-            items.splice(selectedItem + 1, 0, "");
-            insertAfter(selectedItem, items[selectedItem + 1]);
-            updateSelected(selectedItem + 1);
+        if (e.code == "Enter" || e.code == "KeyO") {
+            const newIndex = e.shiftKey ? selectedItem : selectedItem + 1;
+            items.splice(newIndex, 0, "");
+            getSelectedItemElem().classList.remove("selected");
+
+            if (e.shiftKey) insertBefore(selectedItem, items[newIndex]);
+            else insertAfter(selectedItem, items[newIndex]);
+
+            updateSelected(newIndex);
             startEdit();
             e.preventDefault();
         }
