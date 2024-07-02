@@ -1,4 +1,4 @@
-import { div } from "./html";
+import { div, placeCarretAt } from "./html";
 import {
     saveItemsToLocalStorage,
     saveStateToLocalStorage,
@@ -78,6 +78,16 @@ document.addEventListener("keydown", (e) => {
         }
 
         if (e.code == "KeyI") {
+            startEdit();
+            placeCarretAt(getSelectedItemElem(), 0);
+            e.preventDefault();
+        }
+        if (e.code == "KeyA") {
+            startEdit();
+            placeCarretAt(getSelectedItemElem(), items[selectedItem].length);
+            e.preventDefault();
+        }
+        if (e.code == "KeyA") {
             startEdit();
             e.preventDefault();
         }

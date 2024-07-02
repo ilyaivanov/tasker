@@ -24,3 +24,15 @@ export const div = (props: Props) => {
 
     return div;
 };
+
+export function placeCarretAt(element: HTMLElement, position: number) {
+    const range = document.createRange();
+    const selection = window.getSelection()!;
+
+    range.setStart(element.childNodes[0], position);
+    // range.selectNodeContents(element);
+    range.collapse(true);
+
+    selection.removeAllRanges();
+    selection.addRange(range);
+}
